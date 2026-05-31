@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CookmanAi.ToolSelectionPage"
+             Title="Tools Page">
+
+    <Grid RowDefinitions="Auto,*,Auto"
+          Padding="20"
+          RowSpacing="12">
+
+        <VerticalStackLayout Grid.Row="0" Spacing="10">
+            <Label Text="Select Your Appliances"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
+
+            <Label Text="Choose the kitchen tools you have available."
+                   FontSize="14"
+                   TextColor="Gray"
+                   HorizontalTextAlignment="Center" />
+
+            <SearchBar x:Name="ToolSearchBar"
+                       Placeholder="Search tools..."
+                       TextChanged="OnSearchTextChanged" />
+        </VerticalStackLayout>
+
+        <CollectionView Grid.Row="1"
+                        x:Name="ToolCollectionView">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <HorizontalStackLayout Spacing="12" Padding="8,10">
+                        <CheckBox IsChecked="{Binding IsSelected}"
+                                  CheckedChanged="OnToolCheckedChanged" />
+
+                        <Label Text="{Binding Name}"
+                               FontSize="16"
+                               VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <VerticalStackLayout Grid.Row="2" Spacing="8">
+            <Label Text="Selected tools:"
+                   FontSize="14"
+                   FontAttributes="Bold" />
+
+            <Label x:Name="SelectedToolsSummary"
+                   Text="None selected"
+                   FontSize="14"
+                   TextColor="Gray" />
+
+            <Button Text="Continue"
+                    Margin="0,8,0,0" />
+        </VerticalStackLayout>
+
+    </Grid>
+
+</ContentPage>
