@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CookmanAi.RecipeResultsPage"
+             Title="Recipe Results">
+
+    <Grid Padding="16" RowSpacing="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Recipe count -->
+        <Label Grid.Row="0"
+               Text="10 recipes found for your kitchen setup."
+               FontSize="14"
+               HorizontalOptions="Center"
+               HorizontalTextAlignment="Center"
+               TextColor="Gray" />
+
+        <!-- Recipe cards -->
+        <CollectionView x:Name="RecipeCollectionView"
+                        Grid.Row="1">
+
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"
+                                 Span="2"
+                                 HorizontalItemSpacing="10"
+                                 VerticalItemSpacing="10" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="0"
+                           CornerRadius="10"
+                           HasShadow="True"
+                           IsClippedToBounds="True"
+                           HeightRequest="200">
+
+                        <Grid RowSpacing="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <!-- Placeholder image -->
+                            <BoxView Grid.Row="0"
+                                     Color="{Binding CardColor}"
+                                     HorizontalOptions="Fill"
+                                     VerticalOptions="Fill" />
+
+                            <!-- Recipe info -->
+                            <StackLayout Grid.Row="1"
+                                         Padding="8,6"
+                                         Spacing="4"
+                                         BackgroundColor="White">
+
+                                <Label Text="{Binding Name}"
+                                       FontSize="13"
+                                       FontAttributes="Bold"
+                                       LineBreakMode="WordWrap" />
+
+                                <!-- Category tag -->
+                                <Frame Padding="6,2"
+                                       CornerRadius="10"
+                                       BackgroundColor="#EEEEEE"
+                                       HasShadow="False"
+                                       HorizontalOptions="Start">
+
+                                    <Label Text="{Binding Category}"
+                                           FontSize="11"
+                                           TextColor="Gray" />
+
+                                </Frame>
+
+                            </StackLayout>
+
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+        <!-- Find Recipes button -->
+        <Button x:Name="BtnFindRecipes"
+                Grid.Row="2"
+                Text="Find Recipes"
+                IsEnabled="False"
+                HorizontalOptions="Fill" />
+
+    </Grid>
+
+</ContentPage>
+
