@@ -80,11 +80,11 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <Button x:Name="BtnFindRecipes"
+        <Button x:Name="BtnContinue"
                 Grid.Row="2"
-                Text="Find Recipes"
+                Text="Continue"
                 HorizontalOptions="Fill"
-                Clicked="OnFindRecipesClicked" />
+                Clicked="OnContinueClicked" />
 
     </Grid>
 </ContentPage>

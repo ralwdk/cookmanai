@@ -23,6 +23,15 @@ public partial class RecipeResultsPage : ContentPage
 
         // Display recipes in the CollectionView
         RecipeCollectionView.ItemsSource = recipes;
+
+        // Enable the Find Recipes button now that navigation is wired up
+        BtnFindRecipes.IsEnabled = true;
+    }
+
+    // Informs the user that live recipe search is coming in a future sprint
+    private async void OnFindRecipesClicked(object sender, EventArgs e)
+    {
+        await DisplayAlertAsync("Coming Soon", "Recipe search coming soon!", "OK");
     }
 }
 

@@ -2,25 +2,14 @@
 
 public partial class MainPage : ContentPage
 {
-	int count = 0;
-
-	public MainPage()
-	{
-		InitializeComponent();
-	}
-
-    private async void OnIngredientsClicked(object sender, EventArgs e)
+    public MainPage()
     {
-        await Navigation.PushAsync(new IngredientsPage());
+        InitializeComponent();
     }
 
-    private async void OnRecipeResultsClicked(object sender, EventArgs e)
+    // Navigates to the Tool Selection page to begin the recipe flow
+    private async void OnGetStartedClicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new RecipeResultsPage());
-    }
-
-    private async void OnToolSelectionClicked(object sender, EventArgs e)
-    {
-        await Navigation.PushAsync(new ToolSelectionPage());
+        await Shell.Current.GoToAsync(nameof(ToolSelectionPage));
     }
 }

@@ -7,38 +7,19 @@
         <VerticalStackLayout Padding="30" Spacing="25" HorizontalOptions="Center" VerticalOptions="Center">
 
             <Label Text="CookmanAI"
-               FontSize="36"
-               FontAttributes="Bold"
-               TextColor="MediumPurple"
-               HorizontalOptions="Center" />
+                   FontSize="36"
+                   FontAttributes="Bold"
+                   TextColor="MediumPurple"
+                   HorizontalOptions="Center" />
 
-            <Button x:Name="IngredientsBtn"
-                Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
-                Text="Ingredients"
-                FontSize="18"
-                HeightRequest="60"
-                WidthRequest="320"
-                BackgroundColor="MediumPurple"
-                TextColor="White"
-                Clicked="OnIngredientsClicked" />
-
-            <Button x:Name="RecipeResultsBtn"
-                Text="Recipe Results"
-                FontSize="18"
-                HeightRequest="60"
-                WidthRequest="320"
-                BackgroundColor="MediumPurple"
-                TextColor="White"
-                Clicked="OnRecipeResultsClicked" />
-
-            <Button x:Name="ToolSelectionBtn"
-                Text="Tool Selection"
-                FontSize="18"
-                HeightRequest="60"
-                WidthRequest="320"
-                BackgroundColor="MediumPurple"
-                TextColor="White"
-                Clicked="OnToolSelectionClicked" />
+            <Button x:Name="BtnGetStarted"
+                    Text="Get Started"
+                    FontSize="18"
+                    HeightRequest="60"
+                    WidthRequest="320"
+                    BackgroundColor="MediumPurple"
+                    TextColor="White"
+                    Clicked="OnGetStartedClicked" />
 
         </VerticalStackLayout>
     </ScrollView>
