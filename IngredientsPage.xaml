@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CookmanAi.IngredientsPage"
+             Title="Ingredients">
+
+    <Grid Padding="16" RowSpacing="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" ColumnSpacing="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Entry x:Name="IngredientInput"
+                   Grid.Column="0"
+                   Placeholder="e.g., Chicken, Rice, Eggs..."
+                   VerticalOptions="Center" />
+
+            <Button x:Name="BtnAddIngredient"
+                    Grid.Column="1"
+                    Text="Add"
+                    WidthRequest="80"
+                    Clicked="OnAddIngredientClicked"
+                    VerticalOptions="Center" />
+        </Grid>
+
+        <CollectionView x:Name="IngredientsCollectionView"
+                        Grid.Row="1"
+                        Margin="0,10,0,0">
+
+            <CollectionView.EmptyView>
+                <Label Text="No ingredients added yet. Type an item above!"
+                       TextColor="Gray"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       HorizontalTextAlignment="Center"
+                       FontSize="14" />
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Padding="12,8"
+                            Margin="0,0,0,8"
+                            StrokeShape="RoundRectangle 8"
+                            Stroke="#333333"
+                            BackgroundColor="#1E1E1E">
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="0"
+                                   Text="{Binding Name}"
+                                   TextColor="White"
+                                   FontSize="16"
+                                   VerticalOptions="Center" />
+
+                            <Button Grid.Column="1"
+                                    Text="Delete"
+                                    TextColor="#FF4D4D"
+                                    FontAttributes="Bold"
+                                    BackgroundColor="Transparent"
+                                    FontSize="14"
+                                    Padding="10,0"
+                                    HeightRequest="36"
+                                    VerticalOptions="Center"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type CollectionView}}, Path=BindingContext.DeleteCommand}"
+                                    CommandParameter="{Binding .}" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button x:Name="BtnFindRecipes"
+                Grid.Row="2"
+                Text="Find Recipes"
+                HorizontalOptions="Fill"
+                Clicked="OnFindRecipesClicked" />
+
+    </Grid>
+</ContentPage>

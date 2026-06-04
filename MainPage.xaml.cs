@@ -9,15 +9,18 @@ public partial class MainPage : ContentPage
 		InitializeComponent();
 	}
 
-	private void OnCounterClicked(object? sender, EventArgs e)
-	{
-		count++;
+    private async void OnIngredientsClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new IngredientsPage());
+    }
 
-		if (count == 1)
-			CounterBtn.Text = $"Clicked {count} time";
-		else
-			CounterBtn.Text = $"Clicked {count} times";
+    private async void OnRecipeResultsClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new RecipeResultsPage());
+    }
 
-		SemanticScreenReader.Announce(CounterBtn.Text);
-	}
+    private async void OnToolSelectionClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new ToolSelectionPage());
+    }
 }
