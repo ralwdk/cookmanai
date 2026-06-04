@@ -30,6 +30,9 @@ public partial class ToolSelectionPage : ContentPage
 
         // Show every tool when the page first opens
         ToolCollectionView.ItemsSource = _allTools;
+
+        // Enable the Continue button now that navigation is wired up
+        BtnContinue.IsEnabled = true;
     }
 
     // Runs whenever the user types in the search bar
@@ -83,6 +86,12 @@ public partial class ToolSelectionPage : ContentPage
         {
             SelectedToolsSummary.Text = string.Join(", ", selectedNames);
         }
+    }
+
+    // Navigates to the Ingredients page
+    private async void OnContinueClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(IngredientsPage));
     }
 }
 

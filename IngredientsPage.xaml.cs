@@ -1,7 +1,5 @@
-using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using Microsoft.Maui.Controls;
 
 namespace CookmanAi;
 
@@ -39,10 +37,11 @@ public partial class IngredientsPage : ContentPage
             }
         });
 
-        // BindingContext ensures the collection view data loops find the DeleteCommand
+        // BindingContext ensures the CollectionView data loops find the DeleteCommand
         BindingContext = this;
     }
 
+    // Adds a new ingredient to the list
     private void OnAddIngredientClicked(object sender, EventArgs e)
     {
         string text = IngredientInput.Text?.Trim();
@@ -52,16 +51,16 @@ public partial class IngredientsPage : ContentPage
             // Add item to dynamic collection container loop
             Ingredients.Add(new IngredientItem { Name = text });
 
-            // Reset UI state fields 
+            // Reset UI state fields
             IngredientInput.Text = string.Empty;
             IngredientInput.Focus();
         }
     }
 
-    private async void OnFindRecipesClicked(object sender, EventArgs e)
+    // Navigates to the Recipe Results page
+    private async void OnContinueClicked(object sender, EventArgs e)
     {
-        // Transitions natively to your RecipeResultsPage definition block
-        await Navigation.PushAsync(new RecipeResultsPage());
+        await Shell.Current.GoToAsync(nameof(RecipeResultsPage));
     }
 }
 

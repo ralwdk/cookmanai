@@ -32,11 +32,10 @@
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame Padding="0"
-                           CornerRadius="10"
-                           HasShadow="True"
-                           IsClippedToBounds="True"
-                           HeightRequest="200">
+                    <Border Padding="0"
+                            StrokeShape="RoundRectangle 10"
+                            StrokeThickness="0"
+                            HeightRequest="200">
 
                         <Grid RowSpacing="0">
                             <Grid.RowDefinitions>
@@ -62,22 +61,22 @@
                                        LineBreakMode="WordWrap" />
 
                                 <!-- Category tag -->
-                                <Frame Padding="6,2"
-                                       CornerRadius="10"
-                                       BackgroundColor="#EEEEEE"
-                                       HasShadow="False"
-                                       HorizontalOptions="Start">
+                                <Border Padding="6,2"
+                                        StrokeShape="RoundRectangle 10"
+                                        StrokeThickness="0"
+                                        BackgroundColor="#EEEEEE"
+                                        HorizontalOptions="Start">
 
                                     <Label Text="{Binding Category}"
                                            FontSize="11"
                                            TextColor="Gray" />
 
-                                </Frame>
+                                </Border>
 
                             </StackLayout>
 
                         </Grid>
-                    </Frame>
+                    </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
 
@@ -87,10 +86,10 @@
         <Button x:Name="BtnFindRecipes"
                 Grid.Row="2"
                 Text="Find Recipes"
-                IsEnabled="False"
+                IsEnabled="True"
+                Clicked="OnFindRecipesClicked"
                 HorizontalOptions="Fill" />
 
     </Grid>
 
 </ContentPage>
-
