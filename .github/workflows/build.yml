@@ -1,0 +1,115 @@
+name: Build CookmanAi (.NET MAUI)
+
+on:
+  push:
+    branches: [ "feature/4-builds" ]
+  pull_request:
+    branches: [ "feature/4-builds" ]
+  workflow_dispatch: 
+
+env:
+  PROJECT_PATH: 'CookmanAi.csproj'
+  DOTNET_VERSION: '10.0.x'
+
+jobs:
+  # --------------------------------------------------------
+  # ANDROID BUILD JOB
+  # --------------------------------------------------------
+  build-android:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup Java JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'microsoft'
+          java-version: '17'
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Install MAUI Android Workload
+        run: dotnet workload install android
+
+      - name: Restore NuGet Packages
+        run: dotnet restore ${{ env.PROJECT_PATH }}
+
+      - name: Build Android App (Release)
+        run: dotnet build ${{ env.PROJECT_PATH }} -c Release -f net10.0-android
+
+      - name: Upload Android Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: cookman-ai-android
+          path: |
+            **/bin/Release/net10.0-android/*.apk
+            **/bin/Release/net10.0-android/*.aab
+
+  # --------------------------------------------------------
+  # WINDOWS BUILD JOB
+  # --------------------------------------------------------
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Install MAUI Windows Workload
+        run: dotnet workload install maui-windows
+
+      - name: Restore NuGet Packages
+        run: dotnet restore ${{ env.PROJECT_PATH }}
+
+      - name: Publish Windows App (Release)
+        run: |
+          dotnet publish ${{ env.PROJECT_PATH }} -c Release -f net10.0-windows10.0.19041.0 /p:GenerateAppxPackageOnBuild=true
+
+      - name: Upload Windows Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: cookman-ai-windows
+          path: |
+            **/AppPackages/**/*
+            **/bin/Release/net10.0-windows10.0.19041.0/**/*.msix
+
+  # --------------------------------------------------------
+  # iOS BUILD JOB
+  # --------------------------------------------------------
+  build-ios:
+    runs-on: macos-14
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Install MAUI iOS Workload
+        run: dotnet workload install ios
+
+      - name: Restore NuGet Packages
+        run: dotnet restore ${{ env.PROJECT_PATH }}
+
+      - name: Build iOS App (Release Verification)
+        run: |
+          dotnet build ${{ env.PROJECT_PATH }} -c Release -f net10.0-ios /p:ArchiveOnBuild=true /p:EnableCodeSigning=false
+
+      - name: Upload iOS Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: cookman-ai-ios
+          path: **/bin/Release/net10.0-ios/**/*.ipa
